@@ -17,7 +17,7 @@ import { addSignData } from "../../redux/actions/signdataaction";
 import ProgressBar from "./ProgressBar/ProgressBar";
 
 import DisplayImg from "../../assests/displayGif.gif";
-
+import trainedModel from "../../Trained Model/sign_language_recognizer_25-04-2023.task"
 let startTime = "";
 
 const Detect = () => {
@@ -161,7 +161,7 @@ const Detect = () => {
           current = nonEmptyData[i];
         }
       }
-
+      console.log(current);
       resultArray.push(current);
 
       //calculate count for each repeated sign
@@ -215,11 +215,12 @@ const Detect = () => {
       const recognizer = await GestureRecognizer.createFromOptions(vision, {
         baseOptions: {
           modelAssetPath:
-            process.env.REACT_APP_FIREBASE_STORAGE_TRAINED_MODEL_25_04_2023,
+            trainedModel,
         },
         numHands: 2,
         runningMode: runningMode,
       });
+      console.log(recognizer);
       setGestureRecognizer(recognizer);
     }
     loadGestureRecognizer();
